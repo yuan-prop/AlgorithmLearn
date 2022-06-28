@@ -8,8 +8,8 @@ public class Code01_Knapsack {
 
     /**
      *
-     * @param w 各物品的重量
-     * @param v 各物品的价值
+     * @param w 各物品的重量 >=0
+     * @param v 各物品的价值 >=0
      * @param bag 背包大小
      * @return
      */

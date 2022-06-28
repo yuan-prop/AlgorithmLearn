@@ -4,11 +4,12 @@ import java.util.HashMap;
 
 /**
  * 一个图中从源节点出发求到各点的最短路径 (Dijkstra算法)
+ * 适用范围：不能有累加和为负数的环
  */
 public class Code01_Dijkstra {
 
     public static void main(String[] args) {
-        // 创建图（参考 各点最短距离.png）
+        // 创建图（参考 Dijkstra算法各点最短距离.png）
         Node a = new Node('a');
         Node b = new Node('b');
         Node c = new Node('c');

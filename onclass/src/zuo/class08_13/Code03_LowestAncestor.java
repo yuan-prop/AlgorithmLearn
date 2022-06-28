@@ -1,5 +1,8 @@
 package zuo.class08_13;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class Code03_LowestAncestor {
 
     /**
@@ -60,17 +63,74 @@ public class Code03_LowestAncestor {
         return new Info(findA, findB, ans);
     }
 
+    /**
+     * 方法一的简化版（不需要自定义INfo对象）
+     * @param head
+     * @param a
+     * @param b
+     * @return
+     */
+    public static Node lowestAncestor11(Node head, Node a, Node b){
+        return process1(head, a, b);
+    }
+
+    public static Node process1(Node x, Node a, Node b){
+        if(x == null || x == a || x == b){
+            return x;
+        }
+        Node left = process1(x.left, a, b);
+        Node right = process1(x.right, a, b);
+        if(left != null && right != null){
+            return x;
+        }
+        return left != null ? left : right;
+    }
+
 
     /**
      * todo 方法二：利用map将每个节点的父节点记录下来
      * a利用map向上获取所有的父节点，加入到set集合中
      * b再利用map依次向上走到cur，如果set中包含cur，则就是最低公共祖先
      */
-    public static Info lowestAncestor2(Node head, Node a, Node b){
+    public static Node lowestAncestor2(Node x, Node a, Node b){
+        if(x == null || x == a || x == b){
+            return x;
+        }
+        HashMap<Node, Node> map = new HashMap<>();
+        map.put(x, x);
+        getMap(map, x);
+        HashSet<Node> set = new HashSet<>();
+        set.add(x);
+        while(a != x){
+            set.add(a);
+            a = map.get(a);
+        }
+        while (b != x){
+            if(set.contains(b)){
+                return b;
+            }
+            b = map.get(b);
+        }
         return null;
     }
 
-    public class Node{
+    private static void getMap(HashMap<Node, Node> map, Node node) {
+        if(node == null){
+            return;
+        }
+        Node left = node.left;
+        Node right = node.right;
+        if(left != null){
+            map.put(left, node);
+        }
+        if(right != null){
+            map.put(right, node);
+        }
+        getMap(map, left);
+        getMap(map, right);
+    }
+
+    public static class Node{
         int value;
         Node left;
         Node right;
@@ -80,6 +140,40 @@ public class Code03_LowestAncestor {
             this.left = null;
             this.right = null;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
+    }
+
+    public static void main(String[] args) {
+        Node r = new Node(0);
+        Node a = new Node(1);
+        Node b = new Node(2);
+        Node c = new Node(3);
+        Node d = new Node(4);
+
+        r.left = a;
+        a.left = b;
+        a.right = c;
+        c.right = d;
+        System.out.println(lowestAncestor(r, b, d));
+        System.out.println(lowestAncestor11(r, b, d));
+        System.out.println(lowestAncestor2(r, b, d));
+
+        System.out.println("----------------------");
+        System.out.println(lowestAncestor(r, c, d));
+        System.out.println(lowestAncestor11(r, c, d));
+        System.out.println(lowestAncestor2(r, c, d));
+
+
+
+
     }
 
 }

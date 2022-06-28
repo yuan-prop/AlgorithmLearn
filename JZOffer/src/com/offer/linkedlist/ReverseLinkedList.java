@@ -35,5 +35,7 @@ public class ReverseLinkedList {
         return pre;
     }
 
+    //todo 双向链表的反转，类似单链表的方法
+
     //todo 删除链表中指定的节点 num
 }

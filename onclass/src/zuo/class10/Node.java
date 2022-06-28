@@ -13,7 +13,7 @@ public class Node {
     // 出度
     public int out;
 
-    public ArrayList<Node> nodes;
+    public ArrayList<Node> nexts;
     public ArrayList<Edge> edges;
 
 
@@ -21,7 +21,7 @@ public class Node {
         this.value = value;
         this.in = 0;
         this.out = 0;
-        this.nodes = new ArrayList<>();
+        this.nexts = new ArrayList<>();
         this.edges = new ArrayList<>();
     }
 }

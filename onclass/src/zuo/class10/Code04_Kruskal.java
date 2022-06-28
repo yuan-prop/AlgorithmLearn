@@ -13,9 +13,9 @@ import java.util.*;
  */
 public class Code04_Kruskal {
 
-    // Union-Find Set
+    // Union-Find Set(并查集)
     public static class UnionFind{
-        //key 某一个节点，value key节点往上的节点
+        //key 某一个节点，value key节点往上的代表节点
         private HashMap<Node, Node> fatherMap;
 
         // key 某一个集合的代表节点，value：key所在集合的节点个数
@@ -44,6 +44,7 @@ public class Code04_Kruskal {
                 n = fatherMap.get(n);
             }
             while(!path.isEmpty()){
+                // 更新沿途节点的代表节点
                 fatherMap.put(path.pop(), n);
             }
             return n;
