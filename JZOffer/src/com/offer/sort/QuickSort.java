@@ -11,7 +11,8 @@ public class QuickSort {
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
         int[] arr = {3,4,6,1,2,9,2};
-        quickSort.quickSort(arr, 0, arr.length-1);
+//        quickSort.quickSort(arr, 0, arr.length-1);
+        QuickSortByPart(arr, 0, arr.length-1);
         for(int i : arr){
             System.out.print(i + " ");
         }
@@ -45,8 +46,51 @@ public class QuickSort {
         quickSort(arr, i+1, right);
     }
 
-    //todo 快速排序 （partition 荷兰国旗问题）
+    public static void QuickSortByPart(int[] arr, int left, int right){
+        if(left >= right){
+            return;
+        }
+        int[] p = Partition(arr, left, right);
+        QuickSortByPart(arr, left, p[0] - 1);
+        QuickSortByPart(arr, p[1]+1, right);
+    }
 
+    //todo 快速排序 （partition 荷兰国旗问题）
+    public static int[] Partition(int[] arr, int left, int right){
+        if(left > right){
+            return new int[]{-1, -1};
+        }
+        if(left == right){
+            return new int[]{left, right};
+        }
+        int less = left - 1;
+        int more = right+1;
+        int num = left + (int) (Math.random() * (right - left + 1));
+        int d = arr[num];
+//        swap(arr, num, right);
+        int index = left;
+        while(index < more){
+            if(arr[index] < d){
+                less++;
+                if(less != index){
+                    swap(arr, less, index);
+                }
+                index++;
+            }else if(arr[index] == d){
+                index++;
+            }else{
+                swap(arr, index, --more);
+            }
+        }
+//        swap(arr, more, right);
+        return new int[]{less+1, more-1};
+    }
+
+    public static void swap(int arr[], int a, int b){
+        int tmp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = tmp;
+    }
 
 
 }

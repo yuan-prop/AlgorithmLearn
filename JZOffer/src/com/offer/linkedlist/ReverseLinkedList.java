@@ -15,6 +15,41 @@ package com.offer.linkedlist;
 public class ReverseLinkedList {
     private boolean first = true;
     ListNode last = null;
+
+    public static void main(String[] args) {
+        ListNode list1 = new ListNode(1);
+        ListNode list2 = new ListNode(3);
+        ListNode list3 = new ListNode(5);
+        list1.next=list2;list2.next=list3;
+        System.out.println(list1);
+//        ReverseLinkedList reverseLinkedList = new ReverseLinkedList();
+//        ListNode reverse = reverseLinkedList.ReverseList(list1);
+//        System.out.println(reverse);
+        d(list1);
+    }
+
+    public static void d(ListNode head){
+        if(head.next == null) {
+            return;
+        }
+        ListNode node = new ListNode(0);
+        recurseList(null, head, node);
+        System.out.println(node.next);
+    }
+
+    // 递归反转链表
+    public static void recurseList(ListNode pre, ListNode cur, ListNode n){
+        if(cur.next != null){
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            recurseList(pre, next, n);
+        }else{
+            cur.next = pre;
+            n.next = cur;
+        }
+    }
+
     public ListNode ReverseList(ListNode head) {
         if(head == null) return null;
         ListNode cur = head;

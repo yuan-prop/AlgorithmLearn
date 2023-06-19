@@ -74,7 +74,7 @@ public class Code02_PartitionAndQuickSort {
         }
         // 此时在L到R-1范围 划分成了三个区: <arr[R]放左边， ==arr[R]放中间 ，>arr[R]放右边
         // 将R位置和>区的第一个数交换
-        swap(arr, R, more);
+        swap(arr, more, R);
         return new int[]{less+1, more};
     }
 

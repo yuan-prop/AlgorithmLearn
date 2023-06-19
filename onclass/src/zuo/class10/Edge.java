@@ -5,6 +5,7 @@ package zuo.class10;
  */
 public class Edge {
 
+    // 边的权重
     public int weight;
     public Node from;
     public Node to;

@@ -1,5 +1,9 @@
 package com.offer.linkedlist;
 
+/**
+ * 合并两个有序的链表
+ *
+ */
 public class ConnectList {
 
     public static void main(String[] args) {
