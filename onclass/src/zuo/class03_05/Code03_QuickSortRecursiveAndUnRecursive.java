@@ -71,7 +71,7 @@ public class Code03_QuickSortRecursiveAndUnRecursive {
         while (!stack.isEmpty()){
             Op op = stack.pop();
             if(op.l < op.r){
-                swap(arr, op.l + (int) (Math.random() * (op.r - op.r+ 1)), op.r);
+                swap(arr, op.l + (int) (Math.random() * (op.r - op.l + 1)), op.r);
                 equalArea = netherlandsFlag(arr, op.l, op.r);
                 el = equalArea[0];
                 er = equalArea[1];

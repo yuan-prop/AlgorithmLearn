@@ -135,16 +135,26 @@ public class Code02_PartitionAndQuickSort {
         }
         swap(arr, L + (int) (Math.random() * (R - L + 1)), R);
         int[] equalArea = netherlandsFlag(arr, L, R);
-        process2(arr, L, equalArea[0] - 1);
-        process2(arr, equalArea[1] + 1, R);
+        process3(arr, L, equalArea[0] - 1);
+        process3(arr, equalArea[1] + 1, R);
     }
 
     public static void main(String[] args) {
-        int[] arr = new int[]{123,435,6547,876,90,234,78,32,432};
-//        quickSort1(arr);
-//        quickSort2(arr);
-        quickSort3(arr);
+        int[] arr = new int[]{234,54,768,978,76,55,3,2,81, 32,234,65,76,5,37,82, 1};
+        int[] arr2 = new int[]{234,54,768,978,76,55,3,2,81, 32,234,65,76,5,37,82, 1};
+        int[] arr3 = new int[]{234,54,768,978,76,55,3,2,81, 32,234,65,76,5,37,82, 1};
+        quickSort1(arr);
+        quickSort2(arr2);
+        quickSort3(arr3);
         for(int d : arr){
+            System.out.print(d + " ");
+        }
+        System.out.println();
+        for(int d : arr2){
+            System.out.print(d + " ");
+        }
+        System.out.println();
+        for(int d : arr3){
             System.out.print(d + " ");
         }
     }

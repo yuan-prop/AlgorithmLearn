@@ -39,6 +39,24 @@ public class HeapSort {
         }
     }
 
+    public static void heapify2(int arr[], int index, int heapSize){
+        int left = index * 2 + 1; // 左孩子的下标
+        int temp = arr[index];
+        while(left < heapSize){//当前节点还有孩子时
+            //两个孩子，谁的值大，把下标给largest
+            int largest = left + 1<heapSize && arr[left] < arr[left+1] ? left+1 : left;
+
+            // 父和较大孩子间，谁的值大，把下标给largest
+            if(temp >= arr[largest]){
+                break;
+            }
+            arr[index] = arr[largest];
+            index = largest;
+            left = index * 2 +1;
+        }
+        arr[index] = temp;
+    }
+
     public static void swap(int[] arr, int i, int j){
         int tmp = arr[i];
         arr[i] = arr[j];
@@ -54,12 +72,12 @@ public class HeapSort {
             return;
         }
         //1 将整个数组调整成大根堆
-     //   for(int i=0; i<arr.length; i++){//O(N)
-     //       heapInsert(arr, i);//复杂度 O(logN)
-     //   }
-        for(int i=arr.length-1; i >=0 ;i--){//O(N)
-            heapify(arr, i, arr.length);
+        for(int i=0; i<arr.length; i++){//O(N)
+            heapInsert(arr, i);//复杂度 O(logN)
         }
+//        for(int i=arr.length/2-1; i >=0 ;i--){//O(N)
+//            heapify(arr, i, arr.length);
+//        }
 
         int heapSize = arr.length;
         // 2先将根节点和最后一个元素交换，最大的数会放到数组最后位
