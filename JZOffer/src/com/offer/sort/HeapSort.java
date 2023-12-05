@@ -71,10 +71,12 @@ public class HeapSort {
         if(arr == null || arr.length < 2){
             return;
         }
-        //1 将整个数组调整成大根堆
+        // 将整个数组调整成大根堆
+        //方法1 从数据中依次取出元素顺序建立 每一次来一个数据，就在堆的末尾添加数据，并通过heapInsert方法判断新添加的数据该存放在哪个位置
         for(int i=0; i<arr.length; i++){//O(N)
             heapInsert(arr, i);//复杂度 O(logN)
         }
+        // 方法2 在数组的基础上，逆向建立。此时我们从最后一个非叶子结点开始（叶结点不用调整，第一个非叶子结点 arr.length/2-1），从左至右，从下至上进行调整。
 //        for(int i=arr.length/2-1; i >=0 ;i--){//O(N)
 //            heapify(arr, i, arr.length);
 //        }
@@ -91,7 +93,7 @@ public class HeapSort {
     }
 
     public static void main(String[] args) {
-        int[] arr = {3,4,6,1,2,9,18,15,12,44,32};
+        int[] arr = {3425,6453,7,6,78,90,3,4,6,1,2,9,18,15,12,44,32};
         heapSort(arr);
         for(int i : arr){
             System.out.print(i+" ");
