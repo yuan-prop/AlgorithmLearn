@@ -21,6 +21,10 @@ public class AVLTree {
             this.value = value;
         }
 
+        public AVLNode(int key) {
+            this.key = key;
+        }
+
         public AVLNode(int key, Object value, AVLNode left, AVLNode right) {
             this.key = key;
             this.value = value;
@@ -28,6 +32,29 @@ public class AVLTree {
             this.right = right;
         }
 
+        public int getKey() {
+            return key;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
+
+        public AVLNode getLeft() {
+            return left;
+        }
+
+        public void setLeft(AVLNode left) {
+            this.left = left;
+        }
+
+        public AVLNode getRight() {
+            return right;
+        }
 
     }
 
@@ -38,7 +65,7 @@ public class AVLTree {
 
     // 更新节点高度（新增、删除、旋转）
     private void updateHeight(AVLNode node) {
-        node.height = Integer.max(height(node.left), height(node.right));
+        node.height = Integer.max(height(node.left), height(node.right)) + 1;
     }
 
     // 平衡因子 (balance factor)= 左子树高度 - 右子树高度
@@ -180,6 +207,37 @@ public class AVLTree {
         updateHeight(node);
         // 5 balance
         return balance(node);
+    }
+
+    public static void main(String[] args) {
+        AVLTree tree = new AVLTree();
+        tree.put(1, null);
+        tree.put(10, null);
+        tree.put(18, null);
+        tree.put(13, null);
+        tree.put(234, null);
+        tree.put(43, null);
+        tree.put(12, null);
+        tree.put(50, null);
+        tree.put(16, null);
+        tree.put(54, null);
+        tree.put(34, null);
+        tree.put(67, null);
+        tree.put(80, null);
+        tree.put(35, null);
+        tree.put(96, null);
+        tree.put(23, null);
+        tree.put(2, null);
+        tree.put(3, null);
+        tree.put(1000, null);
+        tree.put(100, null);
+        tree.put(200, null);
+        tree.put(0, null);
+        tree.put(-200, null);
+        tree.put(-10, null);
+        AVLNode a = tree.root;
+        PrintTree.PrintNodeInfo<AVLNode> info = new PrintTree.PrintNodeInfo<>(a, AVLNode::getKey, AVLNode::getLeft, AVLNode::getRight);
+        System.out.println(PrintTree.printTree(info));
     }
 
 
