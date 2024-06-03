@@ -235,6 +235,13 @@ public class AVLTree {
         tree.put(0, null);
         tree.put(-200, null);
         tree.put(-10, null);
+        tree.put(2000, null);
+        tree.put(2001, null);
+        tree.put(2002, null);
+        tree.put(2003, null);
+        tree.put(2004, null);
+        tree.put(2005, null);
+        tree.put(2006, null);
         AVLNode a = tree.root;
         PrintTree.PrintNodeInfo<AVLNode> info = new PrintTree.PrintNodeInfo<>(a, AVLNode::getKey, AVLNode::getLeft, AVLNode::getRight);
         System.out.println(PrintTree.printTree(info));

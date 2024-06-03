@@ -12,6 +12,10 @@ import java.util.function.Function;
  */
 public class PrintTree {
 
+    // 每个节点打印的内容最大长度
+    private static final int MAX_LENGTH = 4;
+    private static final char SPACE_BAR = ' ';
+
     /**
      * 打印二叉树
      *
@@ -49,11 +53,14 @@ public class PrintTree {
                 }
                 String value = printNode.value;
                 int i = index - pre - 1;
-                for (int j = 0; j < i; j++) {
-                    sb.append(info.getWight());
+                for (int j = 0; j < i * MAX_LENGTH; j++) {
+                    sb.append(SPACE_BAR);
                 }
                 pre = index;
                 sb.append(value);
+                for (int j = 0; j < MAX_LENGTH - value.length(); j++) {
+                    sb.append(SPACE_BAR);
+                }
             }
             all.append(sb).append(info.line);
         }
@@ -80,11 +87,11 @@ public class PrintTree {
         String s = info.valStr == null ? String.valueOf(info.val.apply(node)) : info.valStr.apply(node);
         PrintNode printNode = new PrintNode(index, s);
         list.add(printNode);
-        if(item == 3){
-            System.out.println();
-        }else if(item == 4){
-            System.out.println();
-        }
+//        if(item == 3){
+//            System.out.println();
+//        }else if(item == 4){
+//            System.out.println();
+//        }
         int w = 1 << (depth - item - 2);
         addPrint(info, info.left.apply(node), index - w, item + 1, depth);
         addPrint(info, info.right.apply(node), index + w, item + 1, depth);

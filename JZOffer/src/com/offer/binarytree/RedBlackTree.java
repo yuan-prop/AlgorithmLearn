@@ -57,6 +57,17 @@ public class RedBlackTree {
             }
         }
 
+        public Node getLeft() {
+            return left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public String name(){
+            return this.key + (this.color == BLACK ? "B" : "R");
+        }
     }
 
     // 判断红
@@ -122,6 +133,7 @@ public class RedBlackTree {
         Node p = root;
         Node parent = null;
         while(p != null){
+            parent = p;
             if(key < p.key) {
                 p = p.left;
             }else if(p.key < key) {
@@ -130,10 +142,9 @@ public class RedBlackTree {
                 p.value = value; // 更新
                 return;
             }
-            parent = p;
         }
         Node inserted = new Node(key, value);
-        if(parent != null){
+        if(parent == null){
             root = inserted;
         }else if(key < parent.key){
             parent.left = inserted;
@@ -387,7 +398,8 @@ public class RedBlackTree {
         redBlackTree.put(67, null);
         redBlackTree.put(87, null);
         redBlackTree.put(100, null);
-
+        PrintTree.PrintNodeInfo<RedBlackTree.Node> info = new PrintTree.PrintNodeInfo<>(redBlackTree.root, RedBlackTree.Node::name, RedBlackTree.Node::getLeft, RedBlackTree.Node::getRight);
+        System.out.println(PrintTree.printTree(info));
     }
 
 
