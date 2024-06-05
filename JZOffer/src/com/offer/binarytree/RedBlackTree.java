@@ -216,7 +216,19 @@ public class RedBlackTree {
     }
 
     /**
-     * 删除
+     * 删除一个节点有如下情况：
+     *     简单情况(doRemove):
+     *      case0 如果删除节点有两个孩子，化简成只有一个孩子或没孩子
+     *      case1 删的是根节点
+     *      case2 删的是黑，剩下的是红，剩下的这个红节点变黑
+     *     双黑的情况(fixDoubleBlack):
+     *      case3 被调整节点的兄弟为红，此时两个侄子定为黑，通过旋转过渡到case4或5
+     *      case4 被调整节点的兄弟为黑，两个侄子都为黑，只需要变色即可
+     *      case5 被调整节点的兄弟为黑，至少一个红侄子
+     *          如果兄弟是左孩子，左侄子是红 LL不平衡
+     *          如果兄弟是左孩子，右侄子是红 LR不平衡
+     *          如果兄弟是右孩子，右侄子是红 RR不平衡
+     *          如果兄弟是右孩子，左侄子是红 RL不平衡
      * 正常删、会用到李代桃僵、遇到黑黑平衡进行调整
      * @param key 键
      */
@@ -333,7 +345,7 @@ public class RedBlackTree {
                     // 复杂处理
                     fixDoubleBlack(replaced);
                 } else {
-                    // 删黑剩红 变色
+                    // case2 删黑剩红 变色
                     replaced.color = BLACK;
                 }
             }
@@ -383,6 +395,56 @@ public class RedBlackTree {
         return s;
     }
 
+    // 规则1 2不用验证
+    // 规则1 所有节点共有两种颜色 红与黑
+    // 规则2 所有null（叶子的子节点）视为黑色
+    private void isValid(RedBlackTree tree) {
+        if(tree.root == null) {
+            return;
+        }
+        // 规则4 根节点必须是黑
+        if(tree.root.color != BLACK) {
+            throw new AssertionError("root's color must be black!");
+        }
+        validateRedBlackInvariant(null, tree.root, 0, new MutableHeight());
+    }
+
+    private static class MutableHeight {
+        private Integer value;
+    }
+
+    private void validateRedBlackInvariant(Node parent, Node node, int thisHeight, MutableHeight height) {
+        // 规则5 每条路径黑色相等 node == null 表示一条路径走到头
+        if(node == null) {
+            // First NIL node?
+            if(height.value == null) {
+                height.value = thisHeight;
+            } else if (height.value != thisHeight) {
+                throw new AssertionError(
+                        "Black-height rule violated(height = "
+                        + height.value
+                        + "; thisHeight = "
+                        + thisHeight
+                        +"; parent = "
+                        + parent.key
+                        + ")");
+            }
+            return;
+        }
+
+        // Count black nodes on path
+        if(node.color == BLACK) {
+            thisHeight++;
+        }
+
+        // 规则3 红色不相邻
+        else if (parent != null && parent.color == RED) {
+            throw new AssertionError("Node " + node.key + "has adjacent red node!");
+        }
+        validateRedBlackInvariant(node, node.left, thisHeight, height);
+        validateRedBlackInvariant(node, node.right, thisHeight, height);
+    }
+
     public static void main(String[] args) {
         RedBlackTree redBlackTree = new RedBlackTree();
         redBlackTree.put(2, null);
@@ -398,6 +460,7 @@ public class RedBlackTree {
         redBlackTree.put(67, null);
         redBlackTree.put(87, null);
         redBlackTree.put(100, null);
+        redBlackTree.isValid(redBlackTree);
         PrintTree.PrintNodeInfo<RedBlackTree.Node> info = new PrintTree.PrintNodeInfo<>(redBlackTree.root, RedBlackTree.Node::name, RedBlackTree.Node::getLeft, RedBlackTree.Node::getRight);
         System.out.println(PrintTree.printTree(info));
     }
