@@ -153,7 +153,59 @@ public class RedBlackTree {
             parent.right = inserted;
             inserted.parent = parent;
         }
-        fixRedRed(inserted);
+//        fixRedRed(inserted);
+        fixAfterInsertion(inserted);
+    }
+
+    // fixRedRed的非递归版本
+    private void fixAfterInsertion(Node x) {
+        x.color = RED;
+        while (x != null && x != root && x.parent.color == RED) {
+            // 插入节点的父亲为红色，触发红红相邻
+            Node y = x.uncle();
+            if(x.parent == root){
+                System.out.println();
+            }
+            if (x.parent.isLeftChild()) {
+                if (isRed(y)) { // 说明y != null
+                    x.parent.color = BLACK;
+                    y.color = BLACK;
+                    x.parent.parent.color = RED;
+                    x = x.parent.parent;
+                } else {
+                    // x父亲为红色说明父亲是非根节点 因此x.parent.parent != null
+                    if (!x.isLeftChild()) {
+                        x = x.parent;
+                        if(x.parent.color == RED){
+                            System.out.println("no way!");
+                        }
+                        leftRotate(x);
+                    }
+                    x.parent.color = BLACK;
+                    x.parent.parent.color = RED;
+                    rightRotate(x.parent.parent);
+                }
+            } else {
+                if (isRed(y)) {
+                    x.parent.color = BLACK;
+                    y.color = BLACK;
+                    x.parent.parent.color = RED;
+                    x = x.parent.parent;
+                } else {
+                    if (x.isLeftChild()) {
+                        x = x.parent;
+                        if(x.parent.color == RED){
+                            System.out.println("no way!");
+                        }
+                        rightRotate(x);
+                    }
+                    x.parent.color = BLACK;
+                    x.parent.parent.color = RED;
+                    leftRotate(x.parent.parent);
+                }
+            }
+        }
+        root.color = BLACK;
     }
 
     /**
@@ -395,9 +447,13 @@ public class RedBlackTree {
         return s;
     }
 
-    // 规则1 2不用验证
-    // 规则1 所有节点共有两种颜色 红与黑
-    // 规则2 所有null（叶子的子节点）视为黑色
+    /**
+     * 验证红黑树
+     * 规则1 所有节点共有两种颜色 红与黑
+     * 规则2 所有null（叶子的子节点）视为黑色
+     * 规则1、2不用验证
+     * @param tree
+     */
     private void isValid(RedBlackTree tree) {
         if(tree.root == null) {
             return;
@@ -460,9 +516,13 @@ public class RedBlackTree {
         redBlackTree.put(67, null);
         redBlackTree.put(87, null);
         redBlackTree.put(100, null);
+//        for (int i = 0; i < 1000000; i++) {
+//            int v = (int)(Math.random() * i) + 1;
+//            redBlackTree.put(v, null);
+//        }
         redBlackTree.isValid(redBlackTree);
         PrintTree.PrintNodeInfo<RedBlackTree.Node> info = new PrintTree.PrintNodeInfo<>(redBlackTree.root, RedBlackTree.Node::name, RedBlackTree.Node::getLeft, RedBlackTree.Node::getRight);
-        System.out.println(PrintTree.printTree(info));
+        PrintTree.printTree(info);
     }
 
 

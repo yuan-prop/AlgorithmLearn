@@ -244,7 +244,7 @@ public class AVLTree {
         tree.put(2006, null);
         AVLNode a = tree.root;
         PrintTree.PrintNodeInfo<AVLNode> info = new PrintTree.PrintNodeInfo<>(a, AVLNode::getKey, AVLNode::getLeft, AVLNode::getRight);
-        System.out.println(PrintTree.printTree(info));
+        PrintTree.printTree(info);
     }
 
 

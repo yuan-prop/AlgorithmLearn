@@ -23,9 +23,9 @@ public class PrintTree {
      * @param <T>  树泛型
      * @return 树
      */
-    public static <T> String printTree(PrintNodeInfo<T> info) {
+    public static <T> void printTree(PrintNodeInfo<T> info) {
         if (info == null) {
-            return "";
+            return;
         }
         T node = info.getNode();
         int deep = findDepth(node, info);
@@ -42,7 +42,6 @@ public class PrintTree {
         for (List<PrintNode> list : lists) {
             list.sort((a, b) -> Integer.compare(a.index, b.index));
         }
-        StringBuilder all = new StringBuilder();
         for (List<PrintNode> list : lists) {
             StringBuilder sb = new StringBuilder();
             int pre = -1;
@@ -62,9 +61,9 @@ public class PrintTree {
                     sb.append(SPACE_BAR);
                 }
             }
-            all.append(sb).append(info.line);
+            sb.append(info.line);
+            System.out.print(sb);
         }
-        return all.toString();
     }
 
     /**
@@ -178,7 +177,7 @@ public class PrintTree {
         private String line = "\n\n";
 
         // 若是树深大于此值，则抛出异常，防止打印的过大（默认8，可自定义）
-        private int maxDepth = 8;
+        private int maxDepth = 100;
 
         public PrintNodeInfo() {
         }
