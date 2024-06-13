@@ -3,7 +3,7 @@ package zuo.class10;
 import java.util.*;
 
 /**
- * 有向图的拓扑排序（安拉依赖关系排序）
+ * 有向图的拓扑排序（按照依赖关系排序）
  * @Author: zhenyuan
  * @Date: 2022/6/11
  */
