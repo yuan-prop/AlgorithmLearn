@@ -13,7 +13,9 @@ public class Node {
     // 出度
     public int out;
 
+    // 后继邻居
     public ArrayList<Node> nexts;
+    // 从它出发的有哪些边
     public ArrayList<Edge> edges;
 
 

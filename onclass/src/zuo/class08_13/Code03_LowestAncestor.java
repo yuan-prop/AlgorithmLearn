@@ -171,7 +171,10 @@ public class Code03_LowestAncestor {
         System.out.println(lowestAncestor11(r, c, d));
         System.out.println(lowestAncestor2(r, c, d));
 
-
+        System.out.println("----------------------");
+        System.out.println(lowestAncestor(r, b, c));
+        System.out.println(lowestAncestor11(r, b, c));
+        System.out.println(lowestAncestor2(r, b, c));
 
 
     }
