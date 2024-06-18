@@ -13,12 +13,10 @@ public class QuickSort {
         int[] arr = {3,4,6,1,2,9,2};
 //        quickSort.quickSort(arr, 0, arr.length-1);
         QuickSortByPart(arr, 0, arr.length-1);
-        for(int i : arr){
-            System.out.print(i + " ");
-        }
+        System.out.println(Arrays.toString(arr));
     }
 
-    // 双指针法
+    // 双指针法 （ 和快排分区partition思想一样）
     private void quickSort(int[] arr, int left, int right) {
         if(left > right) return;
         int tmp = arr[left];

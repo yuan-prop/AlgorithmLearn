@@ -1,9 +1,6 @@
 package zuo.class10;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 最小生成树算法之Prim
@@ -52,5 +49,45 @@ public class Code05_Prim {
             }
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        Node a = new Node('a');
+        Node b = new Node('b');
+        Node c = new Node('c');
+        Node d = new Node('d');
+        Node e = new Node('e');
+
+        Edge ab = new Edge(1, a, b);
+        Edge ac = new Edge(6, a, c);
+        Edge ad = new Edge(4, a, d);
+        Edge bc = new Edge(1, b, c);
+        Edge be = new Edge(6, b, e);
+        Edge ce = new Edge(2, c, e);
+        Edge cd = new Edge(1, c, d);
+        Edge de = new Edge(5, d, e);
+
+        a.edges.add(ab);
+        a.edges.add(ac);
+        a.edges.add(ad);
+        b.edges.add(bc);
+        b.edges.add(be);
+        c.edges.add(cd);
+        c.edges.add(ce);
+        d.edges.add(de);
+
+        Graph graph = new Graph();
+        graph.nodes.put(1, a);
+        graph.nodes.put(2, b);
+        graph.nodes.put(3, c);
+        graph.nodes.put(4, d);
+        graph.nodes.put(5, e);
+
+        graph.edges.addAll(Arrays.asList(ab,ac,ad,bc,be,ce,cd,de));
+
+        Set<Edge> edges = primMST(graph);
+        for(Edge edge : edges) {
+            System.out.println((char)edge.from.value + "->" +(char)edge.to.value + "    " + edge.weight);
+        }
     }
 }

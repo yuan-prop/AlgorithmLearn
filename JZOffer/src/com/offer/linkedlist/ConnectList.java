@@ -8,25 +8,25 @@ public class ConnectList {
 
     public static void main(String[] args) {
 
-        ListNode list1 = new ListNode(1);
-        ListNode list2 = new ListNode(3);
-        ListNode list3 = new ListNode(5);
+        Node list1 = new Node(1);
+        Node list2 = new Node(3);
+        Node list3 = new Node(5);
 
-        ListNode list4 = new ListNode(2);
-        ListNode list5 = new ListNode(4);
-        ListNode list6 = new ListNode(6);
+        Node list4 = new Node(2);
+        Node list5 = new Node(4);
+        Node list6 = new Node(6);
 
         list1.next=list2;list2.next=list3;
         list4.next=list5;list5.next=list6;
-        ListNode merge = Merge(list1, list4);
+        Node merge = Merge(list1, list4);
         System.out.println(merge);
     }
 
-    public static ListNode Merge(ListNode list1,ListNode list2) {
-        ListNode node = null;
-        ListNode n = null;
+    public static Node Merge(Node list1, Node list2) {
+        Node node = null;
+        Node n = null;
         while(list1 != null || list2 != null){
-            ListNode tmp = null;
+            Node tmp = null;
             if(list1 != null && list2 != null){
                 if(list1.val <= list2.val){
                     tmp = list1;

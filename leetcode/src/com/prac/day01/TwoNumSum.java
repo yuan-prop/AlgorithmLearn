@@ -1,6 +1,6 @@
 package com.prac.day01;
 
-import com.offer.linkedlist.ListNode;
+import com.offer.linkedlist.Node;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +37,7 @@ public class TwoNumSum {
      * 两数相加
      * @param
      */
-    public ListNode addTwoNums(ListNode n1, ListNode n2){
+    public Node addTwoNums(Node n1, Node n2){
 
         return null;
     }
