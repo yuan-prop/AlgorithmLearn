@@ -34,7 +34,7 @@ public class Code02_PartitionAndQuickSort {
         int lessEqual = L - 1;
         int index = L;
         while (index < R){
-            if(arr[index] <= arr[R]){
+            if(arr[index] < arr[R]){
                 swap(arr, index, ++lessEqual);
             }
             index++;
